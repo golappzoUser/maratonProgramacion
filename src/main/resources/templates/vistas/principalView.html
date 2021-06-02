@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base-layout::head">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-md-16">
+				<div class="card-body">
+
+					<div class="container mt-10 col-md-8">
+						<h1 th:if="${session.usuario != null}"
+							class="text-center text-uppercase fs-1">
+							Bienvenido <span class="font-italic"
+								th:text="${session.usuario.nombre}"></span>
+						</h1>
+					</div>
+
+					<div class="container mt-0 col-md-10">
+						<p class="fs-7">La notaci&oacute;n de la calificaci&oacute;n
+							de los ejercicios es: Aceptado (A) Pendiente (P) Rechazado (R) No
+							enviado (N)</p>
+					</div>
+
+					<div
+						class="col-md-12 d-grid gap-2 d-md-flex justify-content-md-end">
+						<form method="GET" th:action="@{/private/recargarIndex}">
+							<button type="submit" class="btn btn-primary mt-3">Recargar</button>
+						</form>
+						<form th:if="${session.usuario.rol == 'USER'}" method="GET"
+							th:action="@{/private/desafios}">
+							<button type="submit" class="btn btn-primary mt-3">Desafios</button>
+						</form>
+						<form th:if="${session.usuario.rol == 'ADMIN'}" method="GET"
+							th:action="@{/private/calificarDesafios}">
+							<button type="submit" class="btn btn-primary mt-3">Calificar</button>
+						</form>
+					</div>
+
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-12 mt-3 mb-2">
+								<table id="tablaUsuarios"
+									class="table table-bordered border-dark border-4 table-responsive"
+									style="width: 100%">
+									<caption>Lista de competidores</caption>
+									<thead>
+										<tr>
+											<th
+												class="text-center text-uppercase fs-6 table-primary border border-dark">POSICION</th>
+											<th
+												class="text-center text-uppercase fs-6 table-primary border border-dark">NOMBRE</th>
+											<th
+												class="text-center text-uppercase fs-6 table-primary border border-dark">APELLIDO</th>
+											<th
+												class="text-center text-uppercase fs-6 table-primary border border-dark">Suma
+												Multiplicacion</th>
+											<th
+												class="text-center text-uppercase fs-6 table-primary border border-dark">Hijos
+												Contar</th>
+											<th
+												class="text-center text-uppercase fs-6 table-primary border border-dark">Numero
+												Perfecto</th>
+											<th
+												class="text-center text-uppercase fs-6 table-primary border border-dark">Numeros
+												Pares</th>
+											<th
+												class="text-center text-uppercase fs-6 table-primary border border-dark">Piramide</th>
+											<th
+												class="text-center text-uppercase fs-6 table-primary border border-dark">Secuencia</th>
+											<th
+												class="text-center text-uppercase fs-6 table-primary border border-dark">Validar
+												Mitad</th>
+											<th
+												class="text-center text-uppercase fs-6 table-primary border border-dark">puntuacion</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="competidor,iterator : ${competidores}"
+											class="text-center">
+											<td th:text="${iterator.index+1}"
+												class="text-center text-capitalize"></td>
+											<td th:text="${competidor.nombre}"
+												class="text-center text-capitalize">nombre</td>
+											<td th:text="${competidor.apellido}"
+												class="text-center text-capitalize">apellido</td>
+											<td class="text-centere">
+												<!-- SumaMultiplicacion -->
+												<div th:if="${competidor.estadoSumaMultiplicacion} != 'N'"
+													class="text-nowrap bd-highlight">
+													<div th:switch="${competidor.estadoSumaMultiplicacion}">
+														<p th:case="'A'" class="badge bg-success text-wrap fs-5"
+															style="width: 4rem;"
+															th:text="${competidor.estadoSumaMultiplicacion}"></p>
+														<p th:case="'P'" class="badge bg-warning text-wrap fs-5"
+															style="width: 4rem;"
+															th:text="${competidor.estadoSumaMultiplicacion}"></p>
+													</div>
+												</div>
+											</td>
+											<td class="text-centere">
+												<!-- HijosContar -->
+												<div th:if="${competidor.estadoHijosContar} != 'N'"
+													class="text-nowrap bd-highlight">
+													<div th:switch="${competidor.estadoHijosContar}">
+														<p th:case="'A'" class="badge bg-success text-wrap fs-5"
+															style="width: 4rem;"
+															th:text="${competidor.estadoHijosContar}"></p>
+														<p th:case="'P'" class="badge bg-warning text-wrap fs-5"
+															style="width: 4rem;"
+															th:text="${competidor.estadoHijosContar}"></p>
+													</div>
+												</div>
+											</td>
+											<td class="text-centere">
+												<!-- NumeroPerfecto -->
+												<div th:if="${competidor.estadoNumeroPerfecto} != 'N'"
+													class="text-nowrap bd-highlight">
+													<div th:switch="${competidor.estadoNumeroPerfecto}">
+														<p th:case="'A'" class="badge bg-success text-wrap fs-5"
+															style="width: 4rem;"
+															th:text="${competidor.estadoNumeroPerfecto}"></p>
+														<p th:case="'P'" class="badge bg-warning text-wrap fs-5"
+															style="width: 4rem;"
+															th:text="${competidor.estadoNumeroPerfecto}"></p>
+													</div>
+												</div>
+											</td>
+											<td class="text-centere">
+												<!-- NumerosPares -->
+												<div th:if="${competidor.estadoNumerosPares} != 'N'"
+													class="text-nowrap bd-highlight">
+													<div th:switch="${competidor.estadoNumerosPares}">
+														<p th:case="'A'" class="badge bg-success text-wrap fs-5"
+															style="width: 4rem;"
+															th:text="${competidor.estadoNumerosPares}"></p>
+														<p th:case="'P'" class="badge bg-warning text-wrap fs-5"
+															style="width: 4rem;"
+															th:text="${competidor.estadoNumerosPares}"></p>
+													</div>
+												</div>
+											</td>
+											<td class="text-centere">
+												<!-- Piramide -->
+												<div th:if="${competidor.estadoPiramide} != 'N'"
+													class="text-nowrap bd-highlight">
+													<div th:switch="${competidor.estadoPiramide}">
+														<p th:case="'A'" class="badge bg-success text-wrap fs-5"
+															style="width: 4rem;"
+															th:text="${competidor.estadoPiramide}"></p>
+														<p th:case="'P'" class="badge bg-warning text-wrap fs-5"
+															style="width: 4rem;"
+															th:text="${competidor.estadoPiramide}"></p>
+													</div>
+												</div>
+											</td>
+											<td class="text-centere">
+												<!-- Secuencia -->
+												<div th:if="${competidor.estadoSecuencia} != 'N'"
+													class="text-nowrap bd-highlight">
+													<div th:switch="${competidor.estadoSecuencia}">
+														<p th:case="'A'" class="badge bg-success text-wrap fs-5"
+															style="width: 4rem;"
+															th:text="${competidor.estadoSecuencia}"></p>
+														<p th:case="'P'" class="badge bg-warning text-wrap fs-5"
+															style="width: 4rem;"
+															th:text="${competidor.estadoSecuencia}"></p>
+													</div>
+												</div>
+											</td>
+											<td class="text-centere">
+												<!-- ValidarMitad -->
+												<div th:if="${competidor.estadoValidarMitad} != 'N'"
+													class="text-nowrap bd-highlight">
+													<div th:switch="${competidor.estadoValidarMitad}">
+														<p th:case="'A'" class="badge bg-success text-wrap fs-5"
+															style="width: 4rem;"
+															th:text="${competidor.estadoValidarMitad}"></p>
+														<p th:case="'P'" class="badge bg-warning text-wrap fs-5"
+															style="width: 4rem;"
+															th:text="${competidor.estadoValidarMitad}"></p>
+													</div>
+												</div>
+											</td>
+											<td th:text="${competidor.puntuacion}"
+												class="text-center text-capitalize">puntuacion</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="container mt-0 col-md-12">
+						<form method="POST" th:action="@{/logout}">
+							<button type="submit" class="btn btn-danger mt-3">Salir</button>
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

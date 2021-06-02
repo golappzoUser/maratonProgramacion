@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base-layout::head"></head>
+
+<body>
+
+	<div class="container mt-3">
+		<div class="row justify-content-center">
+			<div class="col-md-16">
+				<div class="card-body">
+
+					<div class="container mt-10 col-md-8">
+						<h1 class="text-center text-uppercase fs-1">Marat&oacute;n de
+							programaci&oacute;n ProgramingTence</h1>
+					</div>
+
+					<div class="container mt-10 col-md-12">
+						<p class="text-center fs-4">Bienvenido a la marat&oacute;n de
+							programaci&oacute;n ProgramingTence</p>
+						<p class="text-start fs-4">En esta plataforma podr&aacute;
+							poner a prueba su conocimiento, aprender y divertirse en el
+							maravilloso mundo de la programaci&oacute;n, mucha suerte en la
+							competencia. VAMOS POR TODO</p>
+					</div>
+
+					<div class="col-md-7 d-grid gap-2 d-md-flex justify-content-md-end">
+						<form method="GET" th:action="@{/auth/login}">
+							<button type="submit" class="btn btn-primary mt-3 btn-lg">Login</button>
+						</form>
+						<div class="col-md-0"></div>
+						<form method="GET" th:action="@{/auth/registro}">
+							<button type="submit" class="btn btn-primary mt-3 btn-lg">Registrarse</button>
+						</form>
+					</div>
+
+					<div class="container mt-4 col-md-12">
+						<div class="img-fluid">
+							<img class="rounded mx-auto d-block"
+								th:src="@{https://upload.wikimedia.org/wikipedia/commons/9/97/Personas_y_tecnolog%C3%ADa%2C_dibujo.png}"
+								alt="Generic placeholder image" width="400" height="400">
+						</div>
+					</div>
+
+					<div class="container mt-4 col-md-12">
+						<p class="text-start fs-4 fw-bolder">Condiciones y
+							recomendaciones:</p>
+						<ul class="xmargin-bottom: 1rem">
+							<li>Se debe trabajar de forma individual es decir sin el uso
+								de internet.</li>
+							<li>Los lenguajes de programaci&oacute;n admitidos son Java
+								y Visual C-char de .NET</li>Con respecto al punto anterior solo se
+							permite el env&iacute;o de archivos .java o .cs
+							<li>Tiempo de la marat&oacute;n 1 hora 30 minutos.</li>
+							<li>Si se evidencian ejercicios exactamente iguales se anula
+								los puntos para los implicados.</li>
+							<li>La salida de los programas debe ser exactamente igual a
+								la solicitada y deben llevar un salto de l&iacute;nea antes de
+								mostrar su resultado. Adem&aacute;s, la entrada no debe mostrar
+								mensajes de texto que soliciten informaci&oacute;n.</li>
+							<li>Los ejercicios aceptados tendr&aacute;n un puntaje de 10
+								y se evidenciaran en una tabla de posiciones:
+								<ol>
+									<li>con la letra A, los enviados y aceptados</li>
+									<li>Con la letra P, ejercicios enviados que no se han
+										revisado</li>
+									<li>si no se evidencia ning&uacute;n estado es porque fue
+										rechazado o no se ha enviado.</li>
+								</ol>
+							</li>
+							<li>No se pueden hacer preguntas a los jueces, solo
+								v&iacute;a correo electr&oacute;nico al Email indicado, el
+								asunto debe llevar el nombre del ejercicio entre corchetes. No
+								se responden los que no cumplan con la estructura.</li>
+							<li>Ayudas:
+								<ol>
+									<li>Split para obtener los datos de entrada que se separen
+										por espacio</li>
+									<li>Cliclos do-whjile, for y while para el recorrer los
+										datos</li>
+									<li>clase List y ArrayList para generar listas sin
+										l&iacute;mite de elementos</li>
+								</ol>
+							</li>
+						</ul>
+					</div>
+
+					<div class="col-lg-10 mt-5 mb-2"></div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>

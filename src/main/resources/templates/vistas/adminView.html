@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base-layout::head">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			<div class="col-md-16">
+				<div class="card-body">
+
+					<div class="container mt-10 col-md-8">
+						<h1 th:if="${session.usuario != null}"
+							class="text-center text-uppercase fs-1">Lista de desafios</h1>
+					</div>
+
+					<div
+						class="col-md-11 d-grid gap-2 d-md-flex justify-content-md-end">
+						<form method="GET" th:action="@{/private/calificarDesafios}">
+							<button type="submit" class="btn btn-primary mt-3">Recargar</button>
+						</form>
+						<form method="GET" th:action="@{/private/recargarIndex}">
+							<button type="submit" class="btn btn-primary mt-3">Lista
+								de posiciones</button>
+						</form>
+					</div>
+
+					<div
+						class="col-md-11 d-grid gap-2 d-md-flex justify-content-md-end">
+						<form method="POST" th:action="@{/private/iniciarMaraton}">
+							<button type="submit" class="btn btn-success mt-3">Iniciar
+								maraton</button>
+						</form>
+						<form method="POST" th:action="@{/private/terminarMaraton}">
+							<button type="submit" class="btn btn-danger mt-3">Terminar
+								maraton</button>
+						</form>
+					</div>
+
+					<div class="container">
+						<div class="row">
+							<div class="col-lg-10 mt-5 mb-2">
+								<ol class="list-group">
+
+									<li th:if="${desafios != null}" class="list-group-item"
+										th:each="desafio : ${desafios}">
+										<ul class="list-group list-group-flush">
+											<li class="list-group-item list-group-item-primary"
+												th:text="${desafio.titulo}"></li>
+											<li class="list-group-item"><a
+												th:href="@{'file/'+${desafio.nombreArchivo}}"><span
+													th:text="${desafio.nombreArchivo}"> </span> </a></li>
+											<li class="list-group-item">
+												<div class="img-fluid">
+													<img class="rounded mx-auto d-block"
+														th:src="@{/{img} (img=${desafio.imagenSolucion})}"
+														alt="Generic placeholder image" width="220" height="220">
+												</div>
+											</li>
+											<li class="list-group-item">
+												<form method="POST"
+													th:action="@{'/private/calificar/'+${desafio.id}}">
+													<div class="col-lg-6">
+														<select class="form-select form-control"
+															aria-label="Default select example"
+															name="estadoCalificacion">
+															<option selected>Seleccion calificacion</option>
+															<option value="Aceptado">Aceptado</option>
+															<option value="Rechazado">Rechazado</option>
+														</select>
+													</div>
+													<div class="col-lg-12 mt-3">
+														<input type="text" class="form-control" name="decripcion">
+													</div>
+													<button type="submit" class="btn btn-outline-primary mt-3"
+														value="Calificar">Calificar</button>
+												</form>
+											</li>
+										</ul>
+									</li>
+									<li th:unless="${desafios != null}">
+										<h5>No se encontraron desafios pendientes por calificar.</h5>
+									</li>
+
+								</ol>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-lg-10 mt-5 mb-2"></div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+server:
+  port: 9696
+  
+#onfiguracion base de datos
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://kashin.db.elephantsql.com:5432/vufclmup
+    password: ApXjaOgQ9U6txCU8Qf9vuCWZ3AxoKSpJ
+    username: vufclmup
+    hikari:
+      maximum-pool-size: 1 #maximo de conexiones a la db  
+
+#configuracion base datos/ ver querys/ creacion de base de datos automatica
+  jpa:
+    database: postgresql
+    #show-sql: true
+    hibernate:
+      ddl-auto: update
+      
+#propiedades de tamaño de archivos
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
+      
+#patron de escritura del log
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:- [%p]} %m%n"
+    
